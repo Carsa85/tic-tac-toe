@@ -13,7 +13,7 @@
     function setConfiguration() {
       //set game configuration
       $log.debug($scope.customGameConfiguration);
-      $rootScope.gameConfiguration = $scope.customGameConfiguratio;
+      $rootScope.gameConfiguration = $scope.customGameConfiguration;
       $log.debug($rootScope.gameConfiguration);
       //Start game
       $location.path('/gameBoard')
