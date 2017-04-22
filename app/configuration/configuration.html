@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>Configura il tuo tic tac toe</h1>
+      <form name="myForm" class="my-form" novalidate>
+        <div ng-class="{'form-group': true,'has-error': myForm.team1.$touched && myForm.team1.$invalid}">
+          <label>Team one*</label>
+          <input type="text" name="team1" ng-model="customGameConfiguration.team1" class="form-control"  placeholder="Enter team name" required>
+          <div class="alert alert-danger margin-top-5 padding-5" role="alert" ng-show="myForm.team1.$touched && myForm.team1.$invalid">Nome Team 1 obbligatorio</div>
+        </div>
+        <div ng-class="{'form-group': true,'has-error': myForm.team2.$touched && myForm.team2.$invalid}">
+          <label>Team two*</label>
+          <input type="text" name="team2" ng-model="customGameConfiguration.team2" class="form-control" placeholder="Enter team name" required>
+          <div class="alert alert-danger margin-top-5 padding-5" role="alert" ng-show="myForm.team2.$touched && myForm.team2.$invalid">Nome Team 2 obbligatorio</div>
+        </div>
+        <div ng-class="{'form-group': true,'has-error': myForm.cols.$touched && myForm.cols.$invalid}">
+          <label>Number of column*</label>
+          <input type="number" name="cols" ng-min="3" ng-max="12" ng-model="customGameConfiguration.cols" class="form-control" placeholder="cols" required>
+          <div class="alert alert-danger margin-top-5 padding-5" role="alert" ng-show="myForm.cols.$touched && myForm.cols.$invalid">Il numero delle colonne deve essere compreso tra 3 e 12</div>
+        </div>
+        <div ng-class="{'form-group': true,'has-error': myForm.rows.$touched && myForm.rows.$invalid}">
+          <label>number of row*</label>
+          <input type="number" name="rows" ng-min="3" ng-max="12" ng-model="customGameConfiguration.rows" class="form-control" placeholder="rows" required>
+          <div class="alert alert-danger margin-top-5 padding-5" role="alert" ng-show="myForm.rows.$touched && myForm.rows.$invalid">Il numero delle righe deve essere compreso tra 3 e 12</div>
+        </div>
+        <button type="submit" class="btn btn-primary" ng-disabled="myForm.$invalid" ng-click="setConfiguration()">Start play</button>
+      </form>
+    </div>
+  </div>
+</div>

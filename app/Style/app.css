@@ -1,0 +1,23 @@
+/* app css stylesheet */
+body {
+  min-width: 320px;
+}
+.navbar-brand {
+   padding: 4px;
+}
+
+.navbar-brand .brand-size {
+  max-height: 100%;
+}
+
+.space {
+  height: 20px;
+}
+
+.padding-5 {
+  padding: 5px; 
+}
+
+.margin-top-5 {
+  margin-top: 5px; 
+}
