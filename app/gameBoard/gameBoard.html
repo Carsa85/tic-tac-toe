@@ -84,8 +84,8 @@
     </div>
     <div class="col-xs-12 col-sm-2"></div>
   </div>
-  <div class="space" ng-if="selectedTeam && isGameStart"></div>
-  <div class="row" ng-if="selectedTeam && isGameStart">
+  <div class="space" ng-if="isGameStop"></div>
+  <div class="row" ng-if="isGameStop">
     <div class="col-xs-12 col-sm-3 text-center"></div>
     <div class="col-xs-12 col-sm-3 text-center padding-5">
       <button type="button" class="btn btn-success btn-lg btn-block" ng-click="reset()">
