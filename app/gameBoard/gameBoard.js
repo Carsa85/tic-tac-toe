@@ -39,29 +39,54 @@
 
     function updateStats(selectedTeam) {
       var stats = $rootScope.statistics;
-      var teamWinner = selectedTeam; 
-      var teamLouser = ((selectedTeam === 'team1') ? 'team2' : 'team1');
-      if (stats.filter(function(e){return e.team == $scope.gameBoardConfiguration[teamWinner]}).length > 0) {
-        stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamWinner])].played = stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamWinner])].played + 1;
-        stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamWinner])].win = stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamWinner])].win + 1;
+
+      if (selectedTeam){
+        var teamWinner = selectedTeam; 
+        var teamLouser = ((selectedTeam === 'team1') ? 'team2' : 'team1');
+        if (stats.filter(function(e){return e.team == $scope.gameBoardConfiguration[teamWinner]}).length > 0) {
+          stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamWinner])].played = stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamWinner])].played + 1;
+          stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamWinner])].win = stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamWinner])].win + 1;
+        } else {
+          stats.push({
+            team: $scope.gameBoardConfiguration[teamWinner],
+            played: 1,
+            win: 1
+          });
+        }
+        if (stats.filter(function(e){return e.team == $scope.gameBoardConfiguration[teamLouser]}).length > 0) {
+          stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamLouser])].played = stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamLouser])].played + 1;
+        } else {
+          stats.push({
+            team: $scope.gameBoardConfiguration[teamLouser],
+            played: 1,
+            win: 0
+          });
+        }
+        $rootScope.statistics = stats;
+        $scope.score[teamWinner] = $scope.score[teamWinner] + 1; 
       } else {
-        stats.push({
-          team: $scope.gameBoardConfiguration[teamWinner],
-          played: 1,
-          win: 1
-        });
+          if (stats.filter(function(e){return e.team == $scope.gameBoardConfiguration['team1']}).length > 0) {
+          stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration['team1'])].played = stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration['team1'])].played + 1;
+        } else {
+          stats.push({
+            team: $scope.gameBoardConfiguration['team1'],
+            played: 1,
+            win: 0 
+          });
+        }
+        if (stats.filter(function(e){return e.team == $scope.gameBoardConfiguration['team2']}).length > 0) {
+          stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration['team2'])].played = stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration['team2'])].played + 1;
+        } else {
+          stats.push({
+            team: $scope.gameBoardConfiguration['team2'],
+            played: 1,
+            win: 0
+          });
+        }
       }
-      if (stats.filter(function(e){return e.team == $scope.gameBoardConfiguration[teamLouser]}).length > 0) {
-        stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamLouser])].played = stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamLouser])].played + 1;
-      } else {
-        stats.push({
-          team: $scope.gameBoardConfiguration[teamLouser],
-          played: 1,
-          win: 0
-        });
-      }
+
       $rootScope.statistics = stats;
-      $scope.score[teamWinner] = $scope.score[teamWinner] + 1; 
+     
     }
 
     function youWin(rowNumber, colNumber, selectedTeam, bordCheckWin) {
@@ -89,6 +114,22 @@
         updateStats(selectedTeam);
         $log.debug($scope.gameBoardConfiguration[selectedTeam] + ' win opposit diagonals');
         return true;
+      } else {
+        var isDraw = true
+        angular.forEach(bordCheckWin, function(value, key) {
+          angular.forEach(value, function(value, key) {
+            if(!angular.isString(value.value)) {
+              isDraw = false;
+            }
+          });
+        });
+        if(isDraw){
+          $scope.isGameStop = true;
+          $scope.draw = true;
+          updateStats(null);
+          $log.debug($scope.gameBoardConfiguration[selectedTeam] + ' win row');
+          return true;
+        }
       }
 
       return false;
@@ -258,6 +299,7 @@
       $scope.selectedTeam = null;
       $scope.isGameStart = false;
       $scope.isGameStop = false;
+      $scope.draw = false;
       $scope.score = {
         team1: 0,
         team2: 0
@@ -273,6 +315,7 @@
       $scope.selectedTeam = (($scope.selectedTeam === 'team1') ? 'team2' : 'team1');
       $scope.isGameStart = true;
       $scope.isGameStop = false;
+      $scope.draw = false;
       createBordCheckWin($scope.gameBoardConfiguration);
     }
 

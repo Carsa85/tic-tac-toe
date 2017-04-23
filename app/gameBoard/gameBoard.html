@@ -62,11 +62,19 @@
     </div>
     <div class="col-xs-12 col-sm-2 text-center"></div>
   </div>
-  <div class="space" ng-if="isGameStop"></div>
-  <div class="row" ng-if="isGameStop">
+  <div class="space" ng-if="isGameStop && !draw"></div>
+  <div class="row" ng-if="isGameStop  && !draw">
     <div class="col-xs-12">
       <div class="alert alert-danger text-center" role="alert">
         <h1>{{gameBoardConfiguration[selectedTeam] + ' win !!'}}</h1>
+      </div>
+    </div>
+  </div>
+  <div class="space" ng-if="draw"></div>
+  <div class="row" ng-if="draw">
+    <div class="col-xs-12">
+      <div class="alert alert-danger text-center" role="alert">
+        <h1>Draw !!</h1>
       </div>
     </div>
   </div>
