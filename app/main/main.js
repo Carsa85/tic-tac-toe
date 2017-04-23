@@ -7,5 +7,8 @@
     ['$scope'];
 
   function mainCtrl($scope) {
+    $scope.init = init;
+
+    function init() {}
   }
 })();

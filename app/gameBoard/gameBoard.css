@@ -1,0 +1,16 @@
+.btn-player {
+    padding-top: 25%;
+    padding-bottom: 25%;
+    font-size: 3em;
+}
+
+.grid-cell {
+    padding: 0px;
+    border: 2px solid rgba(58, 58, 60, 0.66);
+    float: left;
+}
+
+.margin-vertical-5 {
+    margin-left: 5px;
+    margin-right: 5px;
+}

@@ -7,7 +7,8 @@
     'myApp.main',
     'myApp.configuration',
     'myApp.gameBoard',
-    'myApp.ticTacToeCell'
+    'myApp.ticTacToeCell',
+    'myApp.statistics'
   ]).
   config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
     $routeProvider.when('/', {
@@ -22,6 +23,10 @@
       templateUrl: 'gameBoard/gameBoard.html',
       controller: 'gameBoardCtrl'
     })
+    .when('/statistics', {
+      templateUrl: 'statistics/statistics.html',
+      controller: 'statisticsCtrl'
+    })
     .otherwise({redirectTo: '/'});
   }])
   .run(['$rootScope', function($rootScope) {
@@ -33,6 +38,7 @@
       rows: 3
     };
     $rootScope.gameConfiguration = $rootScope.defaultConfiguration;
+    $rootScope.statistics = [];
   }])
   .filter('range', function(){
     return function(n) {

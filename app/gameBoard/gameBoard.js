@@ -36,22 +36,52 @@
       }
     }
 
+    function updateStats(selectedTeam) {
+      var stats = $rootScope.statistics;
+      var teamWinner = selectedTeam; 
+      var teamLouser = ((selectedTeam === 'team1') ? 'team2' : 'team1');
+      if (stats.filter(function(e){return e.team == $scope.gameBoardConfiguration[teamWinner]}).length > 0) {
+        stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamWinner])].plaied = stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamWinner])].plaied + 1;
+        stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamWinner])].win = stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamWinner])].win + 1;
+      } else {
+        stats.push({
+          team: $scope.gameBoardConfiguration[teamWinner],
+          plaied: 1,
+          win: 1
+        });
+      }
+      if (stats.filter(function(e){return e.team == $scope.gameBoardConfiguration[teamLouser]}).length > 0) {
+        stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamLouser])].plaied = stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamLouser])].plaied + 1;
+      } else {
+        stats.push({
+          team: $scope.gameBoardConfiguration[teamLouser],
+          plaied: 1,
+          win: 0
+        });
+      }
+      $rootScope.statistics = stats;
+    }
+
     function youWin(rowNumber, colNumber, selectedTeam, bordCheckWin) {
       
       if(checkCol(rowNumber, colNumber, selectedTeam, bordCheckWin)){
         $scope.isGameStop = true;
+        updateStats(selectedTeam);
         $log.debug($scope.gameBoardConfiguration[selectedTeam] + ' win col');
       }
       else if(checkRow(rowNumber, colNumber, selectedTeam, bordCheckWin)){
         $scope.isGameStop = true;
+        updateStats(selectedTeam);
         $log.debug($scope.gameBoardConfiguration[selectedTeam] + ' win row');
       }
       else if(checkDiagonal(rowNumber, colNumber, selectedTeam, bordCheckWin)){
         $scope.isGameStop = true;
+        updateStats(selectedTeam);
         $log.debug($scope.gameBoardConfiguration[selectedTeam] + ' win diagonals');
       }
       else if(checkOppositDiagonal(rowNumber, colNumber, selectedTeam, bordCheckWin)){
         $scope.isGameStop = true;
+        updateStats(selectedTeam);
         $log.debug($scope.gameBoardConfiguration[selectedTeam] + ' win opposit diagonals');
       }
     }
@@ -215,6 +245,7 @@
       $scope.selectedTeam = null;
       $scope.isGameStart = false;
       $scope.isGameStop = false;
+      
       $scope.gameBoardConfiguration = $rootScope.gameConfiguration;
       $log.debug($rootScope.gameConfiguration);
       $log.debug($scope.gameBoardConfiguration);

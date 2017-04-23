@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="alert alert-info text-center" role="alert">Game Stats</div>
+      <div class="row">
+          <div class="col-xs-12 text-center">
+            <table class="table table-hover">
+              <tr class="info">
+                <th class="text-center">#</th>
+                <th class="text-center">Team</th>
+                <th class="text-center">Plaied</th>
+                <th class="text-center">Win</th>
+                <th class="text-center">Win(%)</th>
+              </tr>
+              <tr ng-repeat="stat in statistics track by $index" ng-class="{'success': $index%2 == 0 , 'danger': $index%2 != 0}">
+                <td>{{$index + 1}}</td>
+                <td>{{stat.team}}</td>
+                <td>{{stat.plaied}}</td>
+                <td>{{stat.win}}</td>
+                <td>{{(100/stat.plaied*stat.win) | number:2}} %</td>
+              </tr>
+            </table>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

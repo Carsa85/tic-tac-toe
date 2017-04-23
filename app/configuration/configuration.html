@@ -28,7 +28,12 @@
           <input type="number" name="forWin" ng-min="3" ng-max="4" ng-model="customGameConfiguration.forWin" class="form-control" placeholder="tic number" required>
           <div class="alert alert-danger margin-top-5 padding-5" role="alert" ng-show="myForm.forWin.$touched && myForm.forWin.$invalid">select a number between 3 and 4</div>
         </div>
-        <button type="submit" class="btn btn-warning btn-lg btn-block" ng-disabled="myForm.$invalid" ng-click="setConfiguration()">Start play</button>
+        <div class="col-xs-12 col-sm-6 padding-5">
+          <button type="submit" class="btn btn-success btn-lg btn-block" ng-disabled="myForm.$invalid" ng-click="setConfiguration()">Save configuration</button>
+        </div>
+        <div class="col-xs-12 col-sm-6 padding-5">
+          <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="startGame()">Start play</button>
+        </div>
       </form>
     </div>
   </div>

@@ -34,20 +34,21 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="#/">Rwturn to home</a></li>
+          <li><a href="#/">Return to home</a></li>
+          <li><a href="#/configuration">Configuration</a></li>
+          <li><a href="#/statistics">Statistics</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div>
   </nav>
-
   <div class="row">
-    <div class="col-xs-12">Header</div>
+    <div class="col-xs-12 header">
+      <h1 class="text-center">Carsa's Tic Tac Toe game</h1>
+    </div>
   </div>
+  <div class="space"></div>
   <div class="row">
     <div class="col-xs-12" ng-view><div class="loading">Loading&#8230;</div></div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">Footer</div>
   </div>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -60,5 +61,6 @@
   <script src="configuration/configuration.js"></script>
   <script src="gameBoard/gameBoard.js"></script>
   <script src="ticTacToeCell/ticTacToeCell.js"></script>
+  <script src="statistics/statistics.js"></script>
 </body>
 </html>

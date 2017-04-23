@@ -1,8 +1,25 @@
 /* app css stylesheet */
 @import '../ticTacToeCell/ticTacToeCell.css';
+@import '../gameBoard/gameBoard.css';
+@import '../configuration/configuration.css';
+@import '../main/main.css';
+@import '../main/main.css';
+html {
+  height: 100%;
+}
+
 body {
   min-width: 320px;
+  overflow-x: hidden;
+  font-family: cursive !important;
+  height: 100%;
+  background: #F8F8F8;
 }
+
+nav {
+  margin-bottom: 0 !important;
+}
+
 .navbar-brand {
    padding: 4px;
 }
@@ -25,4 +42,16 @@ body {
 
 .no-margin {
    margin: 0 !important;
+}
+
+.footer {
+  height: 150px;
+  color: #fff;
+  background: #3A3A3C;
+}
+
+.header {
+  height: 150px;
+  color: #fff;
+  background: #3A3A3C;
 }
