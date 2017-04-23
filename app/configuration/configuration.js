@@ -9,6 +9,7 @@
   function configurationCtrl($scope, $log, $rootScope, $location) {
     $scope.setConfiguration = setConfiguration;
     $scope.startGame = startGame;
+    $scope.setMaxTicNumber = setMaxTicNumber;
     $scope.init = init;
 
     init();
@@ -23,6 +24,14 @@
       init();
     }
 
+    function setMaxTicNumber(row, col) {
+        if(row > col) {
+          $scope.maxTicNumber = ((col > 3)? col : 3);
+        } else {
+          $scope.maxTicNumber = ((row > 3)? row : 3);
+        }
+    }
+
     function startGame() {
       //Start game
       $location.path('/gameBoard');
@@ -30,6 +39,7 @@
 
     function init() {
       $scope.customGameConfiguration = {};
+      $scope.maxTicNumber = 3;
     }
   }
 })();

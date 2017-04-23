@@ -1,3 +1,3 @@
-<button class="tic-tag-toe-cell" ng-click="setOwner(rowNumber, $index, selectedTeam);" ng-disabled="owner">
+<button class="tic-tag-toe-cell" ng-click="setOwner(rowNumber, $index, $parent.$parent.$parent.selectedTeam);" ng-disabled="owner">
     <span ng-class="{'glyphicon': true, 'glyphicon-th-large': owner == 'team1', 'glyphicon-apple': owner == 'team2'}" aria-hidden="true"></span>
 </button>

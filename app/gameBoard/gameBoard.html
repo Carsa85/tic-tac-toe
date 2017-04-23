@@ -52,18 +52,26 @@
   <div class="row" ng-if="selectedTeam && isGameStart">
     <div class="col-xs-12 col-sm-2 text-center"></div>
     <div class="col-xs-5 col-sm-3 text-center padding-5">
-      <h1>{{scotr.team1}}</h1>
+      <h1>{{score.team1}}</h1>
     </div>
     <div class="col-xs-2 col-sm-2 text-center">
       <h1>-</h1>
     </div>
     <div class="col-xs-5 col-sm-3 text-center padding-5">
-      <h1>{{scotr.team2}}</h1>
+      <h1>{{score.team2}}</h1>
     </div>
     <div class="col-xs-12 col-sm-2 text-center"></div>
   </div>
+  <div class="space" ng-if="isGameStop"></div>
+  <div class="row" ng-if="isGameStop">
+    <div class="col-xs-12">
+      <div class="alert alert-danger text-center" role="alert">
+        <h1>{{gameBoardConfiguration[selectedTeam] + ' win !!'}}</h1>
+      </div>
+    </div>
+  </div>
   <div class="space" ng-if="selectedTeam && isGameStart"></div>
-  <div class="row" ng-if="isGameStart">
+  <div class="row" ng-if="isGameStart && !isGameStop">
     <div class="col-xs-12 col-sm-2"></div>
     <div class="col-xs-12 col-sm-8">
       <div class="row text-center margin-vertical-5" ng-repeat="row in gameBoardConfiguration.rows | range track by $index" ng-init="rowNumber = $index">
@@ -80,12 +88,12 @@
   <div class="row" ng-if="selectedTeam && isGameStart">
     <div class="col-xs-12 col-sm-3 text-center"></div>
     <div class="col-xs-12 col-sm-3 text-center padding-5">
-      <button type="button" class="btn btn-success btn-lg btn-block" ng-click="">
+      <button type="button" class="btn btn-success btn-lg btn-block" ng-click="reset()">
         New game
       </button>
     </div>
     <div class="col-xs-12 col-sm-3 text-center padding-5">
-      <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="">
+      <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="goToHome()">
         Homepage
       </button>
     </div>

@@ -15,7 +15,8 @@
     $scope.setFirst = setFirst;
     $scope.startGame = startGame;
     $scope.youWin = youWin;
-
+    $scope.goToHome = goToHome;
+  
     init();
 
     function setFirst(value) {
@@ -60,30 +61,37 @@
         });
       }
       $rootScope.statistics = stats;
+      $scope.score[teamWinner] = $scope.score[teamWinner] + 1; 
     }
 
     function youWin(rowNumber, colNumber, selectedTeam, bordCheckWin) {
       
-      if(checkCol(rowNumber, colNumber, selectedTeam, bordCheckWin)){
+      if(checkCol(rowNumber, colNumber, selectedTeam, bordCheckWin)) {
         $scope.isGameStop = true;
         updateStats(selectedTeam);
         $log.debug($scope.gameBoardConfiguration[selectedTeam] + ' win col');
+        return true;
       }
-      else if(checkRow(rowNumber, colNumber, selectedTeam, bordCheckWin)){
+      else if(checkRow(rowNumber, colNumber, selectedTeam, bordCheckWin)) {
         $scope.isGameStop = true;
         updateStats(selectedTeam);
         $log.debug($scope.gameBoardConfiguration[selectedTeam] + ' win row');
+        return true;
       }
-      else if(checkDiagonal(rowNumber, colNumber, selectedTeam, bordCheckWin)){
+      else if(checkDiagonal(rowNumber, colNumber, selectedTeam, bordCheckWin)) {
         $scope.isGameStop = true;
         updateStats(selectedTeam);
         $log.debug($scope.gameBoardConfiguration[selectedTeam] + ' win diagonals');
+        return true;
       }
-      else if(checkOppositDiagonal(rowNumber, colNumber, selectedTeam, bordCheckWin)){
+      else if(checkOppositDiagonal(rowNumber, colNumber, selectedTeam, bordCheckWin)) {
         $scope.isGameStop = true;
         updateStats(selectedTeam);
         $log.debug($scope.gameBoardConfiguration[selectedTeam] + ' win opposit diagonals');
+        return true;
       }
+
+      return false;
     }
 
     function checkRow(rowNumber, colNumber, selectedTeam, bordCheckWin) {
@@ -240,12 +248,20 @@
 
     }
 
+    function goToHome() {
+      //Start game
+      $location.path('/');
+    }
+
     function init() {
       $scope.bordCheckWin = {};
       $scope.selectedTeam = null;
       $scope.isGameStart = false;
       $scope.isGameStop = false;
-      
+      $scope.score = {
+        team1: 0,
+        team2: 0
+      };
       $scope.gameBoardConfiguration = $rootScope.gameConfiguration;
       $log.debug($rootScope.gameConfiguration);
       $log.debug($scope.gameBoardConfiguration);
@@ -253,7 +269,11 @@
     }
     
     function reset() {
-      init();
+      $scope.bordCheckWin = {};
+      $scope.selectedTeam = (($scope.selectedTeam === 'team1') ? 'team2' : 'team1');
+      $scope.isGameStart = true;
+      $scope.isGameStop = false;
+      createBordCheckWin($scope.gameBoardConfiguration);
     }
 
     function close() {
