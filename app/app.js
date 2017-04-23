@@ -28,6 +28,7 @@
     $rootScope.defaultConfiguration = {
       team1: "Team 1",
       team2: "Team 2",
+      forWin: 3,
       cols: 3,
       rows: 3
     };

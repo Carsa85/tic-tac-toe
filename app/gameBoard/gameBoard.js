@@ -39,24 +39,182 @@
     function youWin(rowNumber, colNumber, selectedTeam, bordCheckWin) {
       
       if(checkCol(rowNumber, colNumber, selectedTeam, bordCheckWin)){
-        
+        $scope.isGameStop = true;
+        $log.debug($scope.gameBoardConfiguration[selectedTeam] + ' win col');
       }
       else if(checkRow(rowNumber, colNumber, selectedTeam, bordCheckWin)){
-        
+        $scope.isGameStop = true;
+        $log.debug($scope.gameBoardConfiguration[selectedTeam] + ' win row');
       }
       else if(checkDiagonal(rowNumber, colNumber, selectedTeam, bordCheckWin)){
-        
+        $scope.isGameStop = true;
+        $log.debug($scope.gameBoardConfiguration[selectedTeam] + ' win diagonals');
       }
-      else if(checkOppositeDiagonal(rowNumber, colNumber, selectedTeam, bordCheckWin)){
-        
+      else if(checkOppositDiagonal(rowNumber, colNumber, selectedTeam, bordCheckWin)){
+        $scope.isGameStop = true;
+        $log.debug($scope.gameBoardConfiguration[selectedTeam] + ' win opposit diagonals');
       }
+    }
+
+    function checkRow(rowNumber, colNumber, selectedTeam, bordCheckWin) {
+      var start = colNumber - ($scope.gameBoardConfiguration.forWin - 1);
+      var stop = colNumber + ($scope.gameBoardConfiguration.forWin - 1);
+      if(start < 0) {
+        start = 0
+      }
+      if(stop >= $scope.gameBoardConfiguration.cols) {
+        stop = $scope.gameBoardConfiguration.cols - 1
+      }
+
+      for (start; start <= stop - ($scope.gameBoardConfiguration.forWin - 1); start++){
+        if(checkWin(rowNumber, start, $scope.gameBoardConfiguration.forWin, selectedTeam, bordCheckWin, 1)) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    function checkCol(rowNumber, colNumber, selectedTeam, bordCheckWin) {
+      var start = rowNumber - ($scope.gameBoardConfiguration.forWin - 1);
+      var stop = rowNumber + ($scope.gameBoardConfiguration.forWin - 1);
+      if(start < 0) {
+        start = 0
+      }
+      if(stop >= $scope.gameBoardConfiguration.rows) {
+        stop = $scope.gameBoardConfiguration.rows - 1
+      }
+
+      for (start; start <= stop - ($scope.gameBoardConfiguration.forWin - 1); start++){
+        if(checkWin(start, colNumber, $scope.gameBoardConfiguration.forWin, selectedTeam, bordCheckWin, 2)) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    function checkDiagonal(rowNumber, colNumber, selectedTeam, bordCheckWin) {
       
+      var startRow = rowNumber - ($scope.gameBoardConfiguration.forWin - 1);
+      var stopRow = rowNumber + ($scope.gameBoardConfiguration.forWin - 1);
+      var startCol = colNumber - ($scope.gameBoardConfiguration.forWin - 1);
+      var stopCol = colNumber + ($scope.gameBoardConfiguration.forWin - 1);
+
+      if(startCol < 0) {
+        startRow = stopRow - stopCol;
+        startCol = 0;
+      }
+      if(startRow < 0) {
+        startCol = stopCol - stopRow;
+        startRow = 0;
+      }
+      if(stopRow > $scope.gameBoardConfiguration.rows - 1) {
+        stopCol = stopCol - (stopRow - $scope.gameBoardConfiguration.rows) - 1;
+        stopRow = $scope.gameBoardConfiguration.rows - 1;
+      }
+      if(stopCol > $scope.gameBoardConfiguration.cols - 1) {
+        stopRow = stopRow - (stopCol - $scope.gameBoardConfiguration.cols) - 1;
+        stopCol = $scope.gameBoardConfiguration.cols - 1;
+      }
+
+      for (startRow, startCol; startRow <= stopRow - ($scope.gameBoardConfiguration.forWin - 1) && startCol <= stopCol - ($scope.gameBoardConfiguration.forWin - 1); startRow++, startCol++){
+        if(checkWin(startRow, startCol, $scope.gameBoardConfiguration.forWin, selectedTeam, bordCheckWin, 3)) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    function checkOppositDiagonal(rowNumber, colNumber, selectedTeam, bordCheckWin) {
+      
+      var startRow = rowNumber + ($scope.gameBoardConfiguration.forWin - 1);
+      var stopRow = rowNumber - ($scope.gameBoardConfiguration.forWin - 1);
+      var startCol = colNumber - ($scope.gameBoardConfiguration.forWin - 1);
+      var stopCol = colNumber + ($scope.gameBoardConfiguration.forWin - 1);
+
+      if(stopRow < 0) {
+        stopCol = stopCol + stopRow;
+        stopRow = 0;
+      }
+      if(startCol < 0) {
+        startRow = startRow + startCol;
+        startCol = 0;
+      }
+
+      if(startRow > $scope.gameBoardConfiguration.rows - 1) {
+        startCol = startCol + (startRow - $scope.gameBoardConfiguration.rows) + 1;
+        startRow = $scope.gameBoardConfiguration.rows - 1;
+      }
+      if(stopCol > $scope.gameBoardConfiguration.cols - 1) {
+        stopRow = stopRow + (stopCol - $scope.gameBoardConfiguration.cols) + 1;
+        stopCol = $scope.gameBoardConfiguration.cols - 1;
+      }
+
+      for (startRow, startCol; startRow >= stopRow - ($scope.gameBoardConfiguration.forWin - 1) && startCol <= stopCol - ($scope.gameBoardConfiguration.forWin - 1); startRow--, startCol++){
+        if(checkWin(startRow, startCol, $scope.gameBoardConfiguration.forWin, selectedTeam, bordCheckWin, 4)) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    function checkWin(row, col, tic, selectedTeam, bordCheckWin, type) {
+
+      var occurrences = 0;
+      var i;
+      var youWin = false;
+
+      switch(type) {
+        case 1:
+        //Check win in row
+          for(i = 0; i < tic; i++, col++) {
+            if(bordCheckWin[row][col].value === selectedTeam){
+              occurrences = occurrences + 1;
+            }
+          }
+          break;
+        case 2:
+        //Check win in col
+          for(i = 0; i < tic; i++, row++) {
+            if(bordCheckWin[row][col].value === selectedTeam){
+              occurrences = occurrences + 1;
+            }
+          }
+          break;
+        case 3:
+        //Check win in diagonar
+          for(i = 0; i < tic; i++, col++, row++) {
+            if(bordCheckWin[row][col].value === selectedTeam){
+              occurrences = occurrences + 1;
+            }
+          }
+          break;
+        case 4:
+        //Check win in opposit diagonal
+          for(i = 0; i < tic; i++, col++, row--) {
+            if(bordCheckWin[row][col].value === selectedTeam){
+              occurrences = occurrences + 1;
+            }
+          }
+          break;
+      }
+
+      if(occurrences === tic){
+        youWin = true;
+      }
+
+      return youWin;
+
     }
 
     function init() {
       $scope.bordCheckWin = {};
       $scope.selectedTeam = null;
       $scope.isGameStart = false;
+      $scope.isGameStop = false;
       $scope.gameBoardConfiguration = $rootScope.gameConfiguration;
       $log.debug($rootScope.gameConfiguration);
       $log.debug($scope.gameBoardConfiguration);
