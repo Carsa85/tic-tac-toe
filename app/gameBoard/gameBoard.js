@@ -42,21 +42,21 @@
       var teamWinner = selectedTeam; 
       var teamLouser = ((selectedTeam === 'team1') ? 'team2' : 'team1');
       if (stats.filter(function(e){return e.team == $scope.gameBoardConfiguration[teamWinner]}).length > 0) {
-        stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamWinner])].plaied = stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamWinner])].plaied + 1;
+        stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamWinner])].played = stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamWinner])].played + 1;
         stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamWinner])].win = stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamWinner])].win + 1;
       } else {
         stats.push({
           team: $scope.gameBoardConfiguration[teamWinner],
-          plaied: 1,
+          played: 1,
           win: 1
         });
       }
       if (stats.filter(function(e){return e.team == $scope.gameBoardConfiguration[teamLouser]}).length > 0) {
-        stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamLouser])].plaied = stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamLouser])].plaied + 1;
+        stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamLouser])].played = stats[stats.map(function(e) { return e.team; }).indexOf($scope.gameBoardConfiguration[teamLouser])].played + 1;
       } else {
         stats.push({
           team: $scope.gameBoardConfiguration[teamLouser],
-          plaied: 1,
+          played: 1,
           win: 0
         });
       }
