@@ -24,7 +24,7 @@
           <div class="alert alert-danger margin-top-5 padding-5" role="alert" ng-show="myForm.rows.$touched && myForm.rows.$invalid">select a number between 3 and 12</div>
         </div>
          <div ng-class="{'form-group': true,'has-error': myForm.forWin.$touched && myForm.forWin.$invalid}">
-          <label>number of row*</label>
+          <label>number of tic*</label>
           <input type="number" name="forWin" ng-min="3" ng-max="maxTicNumber" ng-model="customGameConfiguration.forWin" class="form-control" placeholder="tic number" required>
           <div class="alert alert-danger margin-top-5 padding-5" role="alert" ng-show="myForm.forWin.$touched && myForm.forWin.$invalid">select a number between 3 and {{maxTicNumber}}</div>
         </div>
