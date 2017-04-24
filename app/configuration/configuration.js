@@ -2,8 +2,8 @@
   'use strict';
 
   angular.module('myApp.configuration', ['ngRoute'])
-  .controller('configurationCtrl', configurationCtrl)
-  .$inject =
+  .controller('configurationCtrl', configurationCtrl);
+  configurationCtrl.$inject =
     ['$scope', '$log', '$rootScope', '$location'];
 
   function configurationCtrl($scope, $log, $rootScope, $location) {

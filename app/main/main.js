@@ -2,8 +2,8 @@
   'use strict';
 
   angular.module('myApp.main', ['ngRoute'])
-  .controller('mainCtrl', mainCtrl)
-  .$inject =
+  .controller('mainCtrl', mainCtrl);
+  mainCtrl.$inject =
     ['$scope'];
 
   function mainCtrl($scope) {

@@ -2,8 +2,8 @@
   'use strict';
 
   angular.module('myApp.ticTacToeCell', [])
-  .controller('ticTacToeCellCtrl', ticTacToeCellCtrl)
-  .$inject =
+  .controller('ticTacToeCellCtrl', ticTacToeCellCtrl);
+  ticTacToeCellCtrl.$inject =
     ['$scope', '$log'];
 
   function ticTacToeCellCtrl($scope, $log) {

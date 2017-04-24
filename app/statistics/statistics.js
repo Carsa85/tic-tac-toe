@@ -2,8 +2,8 @@
   'use strict';
 
   angular.module('myApp.statistics', ['ngRoute'])
-  .controller('statisticsCtrl', statisticsCtrl)
-  .$inject =
+  .controller('statisticsCtrl', statisticsCtrl);
+  statisticsCtrl.$inject =
     ['$scope', '$rootScope', '$log'];
 
   function statisticsCtrl($scope, $rootScope, $log) {

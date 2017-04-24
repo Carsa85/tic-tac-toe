@@ -3,9 +3,9 @@
 
   angular.module('myApp.gameBoard', ['ngRoute'])
   .controller('gameBoardCtrl', gameBoardCtrl)
-  .directive('ticTacToeCellDirective', ticTacToeCellDirective)
-  .$inject =
-    ['$scope', '$log', '$rootScope', '$locatio'];
+  .directive('ticTacToeCellDirective', ticTacToeCellDirective);
+  gameBoardCtrl.$inject =
+    ['$scope', '$log', '$rootScope', '$location'];
 
   function gameBoardCtrl($scope, $log, $rootScope, $location) {
   
