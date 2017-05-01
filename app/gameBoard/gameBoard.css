@@ -4,6 +4,32 @@
     font-size: 3em;
 }
 
+.player-1 {
+    color: #3a3a3c;
+    background: #ccc; 
+}
+
+.player-2 {
+    color: #ccc;
+    background: #3a3a3c;
+}
+
+.player-1:hover {
+    color: #4a4a4c;
+    background-color: #999;
+}
+
+.player-2:hover {
+    color: #999; 
+    background-color: #4a4a4c;
+}
+
+.player-1:focus, .player-2:focus{
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
 .grid-cell {
     padding: 0px;
     border: 2px solid rgba(58, 58, 60, 0.66);
